@@ -1,2 +1,2 @@
-# pragmatic-csharp
-Pragmatic C# Course
+# Pragmatic C# Course
+
