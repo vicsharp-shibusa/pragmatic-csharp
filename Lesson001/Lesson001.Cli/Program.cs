@@ -1,38 +1,43 @@
-﻿
+﻿int min = 1;
+int max = 100;
+
 Random rnd = new Random(29873);
 
-for (int i = 0; i < 10; i++)
-{
-    Console.WriteLine(rnd.Next(1, 101));
-}
+var answer = rnd.Next(min, max + 1);
 
-string? name = null;
-string? age = null;
-string? gender = null;
+Console.WriteLine($"I have selected a number between {min} and {max}; please guess.");
 
-for (int i = 2; i >= 0; i--)
+int guess = 0;
+int numGuesses = 0;
+
+while (guess != answer)
 {
-    if (i == 0)
+    Console.Write("Your guess: ");
+    var guessStr = Console.ReadLine();
+
+    if (!int.TryParse(guessStr, out guess))
     {
-        name = GetAnswer("Please enter your name: ");
-    }
-    else if (i == 1)
-    {
-        age = GetAnswer("What is your age?: ");
+        Console.WriteLine($"'{guessStr}' is not a number.");
     }
     else
     {
-        gender = GetAnswer("What is your gender?: ");
+        guess = Convert.ToInt32(guessStr);
+
+        if (guess < answer)
+        {
+            Console.WriteLine("Too low");
+        }
+        else if (guess > answer)
+        {
+            Console.WriteLine("Too high");
+        }
+        else
+        {
+            Console.WriteLine("Yes!");
+        }
+        numGuesses++;
     }
 }
 
-Console.WriteLine(string.Format("Hello, {0}", name));
-Console.WriteLine($"{name}, it's a beautiful day.");
-Console.WriteLine($"It's a good time to be a {age} year old {gender}.");
-
-
-string? GetAnswer(string message)
-{
-    Console.Write(message);
-    return Console.ReadLine();
-}
+Console.WriteLine();
+Console.WriteLine($"You got it in {numGuesses} guesses!");
